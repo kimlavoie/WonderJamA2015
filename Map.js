@@ -11,10 +11,14 @@ function Map(){
     })();
     this.messageBox = (function(){
         var container = new createjs.Container();
-        var graphics = new createjs.Graphics().beginFill("#ff0000")
+        var graphics = new createjs.Graphics().beginFill("rgba(50,50,250,0.5)")
             .drawRect(0,VIEWPORT.height-100,VIEWPORT.width,100); 
         var shape = new createjs.Shape(graphics);
+        var g2 = new createjs.Graphics().setStrokeStyle(5).beginStroke("rgba(150,150,200,1)")
+            .drawRect(2,VIEWPORT.height-100,VIEWPORT.width-4,100-2); 
+        var shape2 = new createjs.Shape(g2);
         container.addChild(shape);
+        container.addChild(shape2);
         container.addChild(that.message);
         container.visible = false;
         return container;
@@ -153,22 +157,21 @@ function Map(){
            
     this.onUpdate = function(){
         that.handleWalk();
-
+        if(InputManager.keyStates.space) that.hideMessage();
         that.stage.update(event);
-
     };
     this.bg = "test";
     this.objects = [
             {type: "image", collidable: false, pos: {x:0, y:0}, imgID: "test2", onCollision: function(character){}},
             {type: "image", collidable: false, pos: {x:100, y:100}, imgID: "test2"},
-            {type: "text", collidable: true, onCollision: function(character){},pos: {x:200, y:400}, text: "Hello!", font: "20px Arial", color: "#ff00ff"}
+            {type: "text", collidable: true, onCollision: function(character){that.showMessage("YOUPPI!");},pos: {x:200, y:400}, text: "Hello!", font: "20px Arial", color: "#ff00ff"}
         ];
     this.characters = [
             {name:"kim", pos:"top"},
             {name:"vero", pos:"left"},
             {name:"jordan", pos:"right"}
         ];
-    this.cameraCenter = {x:0, y:0};
+    this.cameraCenter = {x:200, y:500};
     this.randomEncounterPercentage = 0;
     this.encounterGroups = [];
 }
