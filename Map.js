@@ -28,23 +28,28 @@ function Map(){
         that.innerObjects.addChild(bg);
 
         that.objects.forEach(function(object){
+            var newObject;
             switch(object.type){
                 case "image":
-                    var bitmap = new createjs.Bitmap(ImageManager.getImage(object.imgID));
-                    bitmap.x = object.pos.x;
-                    bitmap.y = object.pos.y;
-                    that.innerObjects.addChild(bitmap);
+                    newObject = new createjs.Bitmap(ImageManager.getImage(object.imgID));
                     break;
                 case "text":
-                    var text = new createjs.Text(object.text, object.font, object.color);
-                    text.x = object.pos.x;
-                    text.y = object.pos.y;
-                    that.innerObjects.addChild(text);
+                    newObject = new createjs.Text(object.text, object.font, object.color);
                     break;
             }
+            newObject.x = object.pos.x;
+            newObject.y = object.pos.y;
+            if(object.collidable){
+                newObject.collidable = true;
+                newObject.onCollision = object.onCollision;
+            }
+            that.innerObjects.addChild(newObject);
         });
         that.characters.forEach(function(character){
             var sprite = SpriteManager[character.name];
+            sprite.onCollision = function(obj){
+                console.log("collision!");
+            };
             var pos;
             switch(character.pos){
                 case "top":
@@ -120,6 +125,32 @@ function Map(){
             face(that.direction);
         }
     };
+    function collide(o1, o2){
+        var c1 = o1.getBounds();
+        var temp = o1.localToGlobal(0,0);
+        c1.x = temp.x;
+        c1.y = temp.y
+        var c2 = o2.getBounds();
+        temp = o2.localToGlobal(0,0);
+        c2.x = temp.x;
+        c2.y = temp.y
+        return !(c1.x > c2.x + c2.width
+               || c1.y > c2.y + c2.height
+               || c1.x + c1.width < c2.x
+               || c1.y + c1.height < c2.y);
+    }
+            
+    this.updateCollisions = function(){
+        that.mainCharacters.children.forEach(function(character){
+            that.innerObjects.children.forEach(function(object){
+                if(object.collidable && collide(character, object)){
+                    character.onCollision(object);
+                    object.onCollision(character);
+                }
+            });
+        });
+    };
+           
     this.onUpdate = function(){
         that.handleWalk();
 
@@ -128,9 +159,9 @@ function Map(){
     };
     this.bg = "test";
     this.objects = [
-            {type: "image", collidable: true, pos: {x:0, y:0}, imgID: "test2"},
-            {type: "image", collidable: true, pos: {x:100, y:100}, imgID: "test2"},
-            {type: "text", pos: {x:200, y:400}, text: "Hello!", font: "20px Arial", color: "#ff00ff"}
+            {type: "image", collidable: false, pos: {x:0, y:0}, imgID: "test2", onCollision: function(character){}},
+            {type: "image", collidable: false, pos: {x:100, y:100}, imgID: "test2"},
+            {type: "text", collidable: true, onCollision: function(character){},pos: {x:200, y:400}, text: "Hello!", font: "20px Arial", color: "#ff00ff"}
         ];
     this.characters = [
             {name:"kim", pos:"top"},
