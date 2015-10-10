@@ -46,6 +46,15 @@ function Map(){
         that.messageBox.visible = false;
         that.stage.update();
     };
+    this.moveCamera = function(x,y){
+        that.innerObjects.x -= x;
+        that.innerObjects.y -= y;
+        that.stage.update();
+    };
+    this.onUpdate = function(){
+        if(InputManager.keyStates.left) that.moveCamera(1,0);
+    };
+
 
 
 

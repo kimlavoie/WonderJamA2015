@@ -17,8 +17,8 @@ function Main(){
             {src: "assets/testSound.mp3", id: "testMusic"}
     ]);
 
-    this.document.onkeydown = SceneManager.onKeyPressed;
-    this.document.onkeyup = SceneManager.onKeyReleased;
+    this.document.onkeydown = InputManager.onKeyDown;
+    this.document.onkeyup = InputManager.onKeyUp;
 
 
     var queue = new createjs.LoadQueue();

@@ -23,18 +23,19 @@ var SceneManager = new (function(){
         currentScene.stage = that.stage;
         if(currentScene.state === "new"){
             currentScene.onCreate();
+            currentScene.state = "running";
         }
+
+        createjs.Ticker.addEventListener("tick", function(event){
+            currentScene.onUpdate();
+        });
+
+        
         /*
         currentScene.characters.forEach(function(character){
             stage.addChild(character);
         });
         */
-    };
-    this.onKeyPressed = function(event){
-        that.sceneStack[that.sceneStack.length - 1].onKeyPressed(event);
-    };
-    this.onKeyReleased = function(event){
-        that.sceneStack[that.sceneStack.length - 1].onKeyReleased(event);
     };
 })();
         
