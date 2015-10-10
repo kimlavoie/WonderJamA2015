@@ -8,7 +8,10 @@ function Main(){
 
     ImageManager.addImages([
             {src: "assets/test2.png", id: "test2"},
-            {src: "assets/test.png", id: "test"}
+            {src: "assets/test.png", id: "test"},
+			{src: "assets/bg.jpg", id:"bg"},
+			{src: "assets/fightMenu.png", id:"fightMenu"},
+			{src: "assets/ennemy.png", id:"ennemySprite"}
     ]);
     SoundManager.addSounds([
             {src: "assets/testSound.mp3", id: "testSound"}
@@ -27,7 +30,8 @@ function Main(){
     function handleComplete() {
         ImageManager.addBitmaps(queue);
         //SoundManager.play("testSound");
-        MusicManager.play("testMusic", false);
+        //MusicManager.play("testMusic", false);
+		var fi = new Fight([1,2,3]);
 
         stage.addChild(ImageManager.getImage("test2"));
         stage.update();

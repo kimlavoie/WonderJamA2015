@@ -45,35 +45,18 @@ function Main()
          
     stage.mouseEventsEnabled = true;
      
-     
-    /* Set The Flash Plugin for browsers that don't support SoundJS */
-    SoundJS.FlashPlugin.BASE_PATH = "assets/";
-    if (!SoundJS.checkPlugin(true)) {
-      alert("Error!");
-      return;
-    }
- 
     manifest = [
-                {src:"bg.png", id:"bg"},
-                {src:"main.png", id:"main"},
-                {src:"startB.png", id:"startB"},
-                {src:"creditsB.png", id:"creditsB"},
-                {src:"credits.png", id:"credits"},
-                {src:"paddle.png", id:"cpu"},
-                {src:"paddle.png", id:"player"},
-                {src:"ball.png", id:"ball"},
-                {src:"win.png", id:"win"},
-                {src:"lose.png", id:"lose"},
-                {src:"playerScore.mp3|playerScore.ogg", id:"playerScore"},
-                {src:"enemyScore.mp3|enemyScore.ogg", id:"enemyScore"},
-                {src:"hit.mp3|hit.ogg", id:"hit"},
-                {src:"wall.mp3|wall.ogg", id:"wall"}
+				{src:"assets/potato.jpg", id:"potato"},
+				{src:"assets/bg.jpg", id:"bg"},
+				{src:"assets/fightMenu.png", id:"fightMenu"},
+				{src:"assets/ennemy.png", id:"ennemySprite1"},
+				{src:"assets/ennemy.png", id:"ennemySprite2"},
+				{src:"assets/ennemy.png", id:"ennemySprite3"},
+				{src:"assets/ennemy.png", id:"ennemySprite4"}
             ];
  
- 
- 
     preloader = new PreloadJS();
-    preloader.installPlugin(SoundJS);
+    //preloader.installPlugin(SoundJS);
     preloader.onProgress = handleProgress;
     preloader.onComplete = handleComplete;
     preloader.onFileLoad = handleFileLoad;
@@ -105,6 +88,9 @@ function handleFileLoad(event) {
             img.src = event.src;
             img.onload = handleLoadComplete;
 			window[event.id] = new Bitmap(img);
+			window[event.id].id = event.id;
+			
+			
         break;
  
         case PreloadJS.SOUND:
@@ -122,4 +108,87 @@ function handleLoadComplete(event)
    {
        addTitleView();
    }
+}
+
+function addTitleView()
+{
+	/*potato.x = 50;
+	potato.y = 50;
+	TitleView.addChild(potato);
+	stage.addChild(TitleView);
+	stage.update();*/
+	console.log("ding");
+    var fi = new Fight([1,2,3]);
+	
+    
+}
+
+function showCredits()
+{
+    // Show Credits
+         
+    credits.x = 480;
+         
+    stage.addChild(credits);
+    stage.update();
+    Tween.get(credits).to({x:0}, 300);
+    credits.onPress = hideCredits;
+}
+ 
+// Hide Credits
+ 
+function hideCredits(e)
+{
+    Tween.get(credits).to({x:480}, 300).call(rmvCredits);
+}
+ 
+// Remove Credits
+ 
+function rmvCredits()
+{
+    stage.removeChild(credits);
+}
+ 
+// Tween Title View
+ 
+function tweenTitleView()
+{       
+    // Start Game
+         
+    Tween.get(TitleView).to({y:-320}, 300).call(addGameView);
+}
+
+function addGameView()
+{
+    // Destroy Menu & Credits screen
+     
+    stage.removeChild(TitleView);
+    TitleView = null;
+    credits = null;
+     
+    // Add Game View
+     
+     
+    // Start Listener 
+     
+    bg.onPress = startGame;
+}
+
+function startGame(e)
+{
+    bg.onPress = null;
+    stage.onMouseMove = movePlayer;
+     
+    Ticker.addListener(tkr, false);
+    tkr.tick = update;
+}
+
+function movePlayer(e)
+{
+    //moving the player depending of the things done
+}
+
+function update()
+{
+    //what happend every ticks
 }
