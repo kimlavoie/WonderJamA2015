@@ -1,17 +1,18 @@
-var stage;
-
 function Main(){
     var canvas = document.getElementById("PongStage");
     stage = new createjs.Stage(canvas);
 
     stage.mouseEventsEnabled = true;
 
+    SceneManager.stage = stage;
+
     ImageManager.addImages([
             {src: "assets/test2.png", id: "test2"},
             {src: "assets/test.png", id: "test"},
+			{src: "assets/potato.jpg", id:"potato"},
 			{src: "assets/bg.jpg", id:"bg"},
 			{src: "assets/fightMenu.png", id:"fightMenu"},
-			{src: "assets/ennemy.png", id:"ennemySprite"}
+			{src: "assets/ennemy.png", id:"ennemySprite"},
     ]);
     SoundManager.addSounds([
             {src: "assets/testSound.mp3", id: "testSound"}
@@ -19,6 +20,9 @@ function Main(){
     MusicManager.addMusics([
             {src: "assets/testSound.mp3", id: "testMusic"}
     ]);
+
+    this.document.onkeydown = SceneManager.onKeyPressed;
+    this.document.onkeyup = SceneManager.onKeyReleased;
 
 
     var queue = new createjs.LoadQueue();
@@ -29,12 +33,7 @@ function Main(){
     queue.on("complete", handleComplete, this);
     function handleComplete() {
         ImageManager.addBitmaps(queue);
-        //SoundManager.play("testSound");
-        //MusicManager.play("testMusic", false);
-		var fi = new Fight([1,2,3]);
-
-        stage.addChild(ImageManager.getImage("test2"));
-        stage.update();
+        SceneManager.load(new Map());
     }
 }
 
