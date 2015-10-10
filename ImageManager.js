@@ -8,7 +8,7 @@
      };
      this.addBitmaps = function(queue){
          for(var id in that.images){
-             that.images[id].img = new createjs.Bitmap(queue.getResult(id));
+             that.images[id].img = queue.getResult(id);
          }
      };
      this.getManifest = function(){
@@ -19,7 +19,7 @@
          return list;
      };
      this.getImage = function(id){
-         return this.images[id].img;
+         return that.images[id].img;
      };
 })();
 

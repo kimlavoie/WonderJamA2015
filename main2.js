@@ -1,10 +1,10 @@
-var stage;
-
 function Main(){
     var canvas = document.getElementById("PongStage");
     stage = new createjs.Stage(canvas);
 
     stage.mouseEventsEnabled = true;
+
+    SceneManager.stage = stage;
 
     ImageManager.addImages([
             {src: "assets/test2.png", id: "test2"},
@@ -17,6 +17,9 @@ function Main(){
             {src: "assets/testSound.mp3", id: "testMusic"}
     ]);
 
+    this.document.onkeydown = SceneManager.onKeyPressed;
+    this.document.onkeyup = SceneManager.onKeyReleased;
+
 
     var queue = new createjs.LoadQueue();
     queue.installPlugin(createjs.Sound);
@@ -26,11 +29,7 @@ function Main(){
     queue.on("complete", handleComplete, this);
     function handleComplete() {
         ImageManager.addBitmaps(queue);
-        //SoundManager.play("testSound");
-        MusicManager.play("testMusic", false);
-
-        stage.addChild(ImageManager.getImage("test2"));
-        stage.update();
+        SceneManager.load(new Map());
     }
 }
 
