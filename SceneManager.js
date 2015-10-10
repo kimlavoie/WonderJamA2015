@@ -27,7 +27,7 @@ var SceneManager = new (function(){
     this.changeScene = function(){
         that.stage.removeAllChildren();
         var currentScene = that.sceneStack[that.sceneStack.length - 1];
-        currentScene.stage = that.stage;
+        currentScene.setStage(that.stage);
         if(currentScene.state === "new"){
             currentScene.onCreate();
         }
@@ -43,6 +43,7 @@ var SceneManager = new (function(){
             currentScene.updateCollisions();
             currentScene.onUpdate();
         });
+
     };
 })();
         

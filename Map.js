@@ -1,6 +1,26 @@
 function Map(){
     var that = this;
     this.state = "new";
+    this.stage = null;
+    this.bg;
+    this.objects;
+    this.characters;
+    this.cameraCenter;
+    this.randomEncounterPercentage;
+    this.encounterGroups;
+    this.setBg = function(bg){that.bg = bg;};
+    this.setObjects = function(objects){that.objects = objects;};
+    this.setCharacters = function(characters){that.characters = characters;};
+    this.setCameraCenter = function(cameraCenter){that.cameraCenter = cameraCenter;};
+    this.setRandomEncounterPercentage = function(randomEncounter){
+        that.randomEncounterPercentage = randomEncounter;
+    };
+    this.setEncounterGroups = function(encounterGroups){
+        that.encounterGroups = encounterGroups;
+    };
+    this.setStage = function(stage){
+        that.stage = stage;
+    };
     this.message = (function(){
         text = new createjs.Text("", "20px monospace");
         text.x = 10;
@@ -155,23 +175,4 @@ function Map(){
         });
     };
            
-    this.onUpdate = function(){
-        that.handleWalk();
-        if(InputManager.keyStates.space) that.hideMessage();
-        that.stage.update(event);
-    };
-    this.bg = "test";
-    this.objects = [
-            {type: "image", collidable: false, pos: {x:0, y:0}, imgID: "test2", onCollision: function(character){}},
-            {type: "image", collidable: false, pos: {x:100, y:100}, imgID: "test2"},
-            {type: "text", collidable: true, onCollision: function(character){that.showMessage("YOUPPI!");},pos: {x:200, y:400}, text: "Hello!", font: "20px Arial", color: "#ff00ff"}
-        ];
-    this.characters = [
-            {name:"kim", pos:"top"},
-            {name:"vero", pos:"left"},
-            {name:"jordan", pos:"right"}
-        ];
-    this.cameraCenter = {x:200, y:500};
-    this.randomEncounterPercentage = 0;
-    this.encounterGroups = [];
 }
