@@ -15,7 +15,7 @@ var SpriteManager = new (function(){
         };
         var spritesheet = new createjs.SpriteSheet(data);
         var sprite =  new createjs.Sprite(spritesheet);
-        sprite.gotoAndPlay("walkDown");
+        sprite.gotoAndPlay("standDown");
         return sprite;
     }
     this.kim = getSprite("kim"); 

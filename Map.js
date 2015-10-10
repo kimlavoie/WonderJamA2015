@@ -45,6 +45,21 @@ function Map(){
         });
         that.characters.forEach(function(character){
             var sprite = SpriteManager[character.name];
+            var pos;
+            switch(character.pos){
+                case "top":
+                    pos = {x:VIEWPORT.width/2-16, y:VIEWPORT.height/2-144/3};
+                    break;
+                case "left":
+                    pos = {x:VIEWPORT.width/2-32, y:VIEWPORT.height/2};
+                    break;
+                case "right":
+                    pos = {x:VIEWPORT.width/2, y:VIEWPORT.height/2};
+                   break;
+            }
+            sprite.x = pos.x;
+            sprite.y = pos.y;
+
             that.mainCharacters.addChild(sprite);
         });
         that.innerObjects.x = VIEWPORT.width/2 - that.cameraCenter.x;
@@ -64,9 +79,50 @@ function Map(){
         that.innerObjects.x -= x;
         that.innerObjects.y -= y;
     };
+    function walk(direction){
+        direction = direction.charAt(0).toUpperCase() + direction.slice(1);
+        if(!that.walking || direction !== that.direction){
+            SpriteManager.kim.gotoAndPlay("walk" + direction);
+            SpriteManager.vero.gotoAndPlay("walk" + direction);
+            SpriteManager.jordan.gotoAndPlay("walk" + direction);
+            that.walking = true;
+            that.direction = direction;
+         }
+    }
+    function face(direction){
+        direction = direction.charAt(0).toUpperCase() + direction.slice(1);
+        SpriteManager.kim.gotoAndPlay("stand" + direction);
+        SpriteManager.vero.gotoAndPlay("stand" + direction);
+        SpriteManager.jordan.gotoAndPlay("stand" + direction);
+    }
+
+    this.walking = false;
+    this.direction = "down";
+    this.handleWalk = function(){
+        if(InputManager.keyStates.right){
+            walk("right");
+            that.moveCamera(5,0)
+        }
+        else if(InputManager.keyStates.down){
+            walk("down");
+            that.moveCamera(0,5)
+        }
+        else if(InputManager.keyStates.up){
+            walk("up");
+            that.moveCamera(0,-5)
+        }
+        else if(InputManager.keyStates.left){
+            walk("left");
+            that.moveCamera(-5,0)
+        }
+        else{
+            that.walking = false;
+            face(that.direction);
+        }
+    };
     this.onUpdate = function(){
-        if(InputManager.keyStates.left) that.moveCamera(1,0);
-        if(InputManager.keyStates.right) SpriteManager.kim.gotoAndPlay("walkRight");
+        that.handleWalk();
+
         that.stage.update(event);
 
     };
@@ -78,8 +134,8 @@ function Map(){
         ];
     this.characters = [
             {name:"kim", pos:"top"},
-            //{name:"vero", pos:"left"},
-            //{name:"jordan", pos:"right"}
+            {name:"vero", pos:"left"},
+            {name:"jordan", pos:"right"}
         ];
     this.cameraCenter = {x:0, y:0};
     this.randomEncounterPercentage = 0;
