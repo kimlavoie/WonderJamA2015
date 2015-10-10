@@ -1,3 +1,5 @@
+var VIEWPORT = {width: 640, height: 480};
+
 var SceneManager = new (function(){
     var that = this;
     this.stage = null;
@@ -18,17 +20,15 @@ var SceneManager = new (function(){
     this.changeScene = function(){
         that.stage.removeAllChildren();
         var currentScene = that.sceneStack[that.sceneStack.length - 1];
-        that.stage.addChild(new createjs.Bitmap(ImageManager.getImage(currentScene.bg)));
-        currentScene.objects.forEach(function(object){
-            var bitmap = new createjs.Bitmap(ImageManager.getImage(object.img));
-            bitmap.x = object.pos.x;
-            bitmap.y = object.pos.y;
-            stage.addChild(bitmap);
-        });
+        currentScene.stage = that.stage;
+        if(currentScene.state === "new"){
+            currentScene.onCreate();
+        }
+        /*
         currentScene.characters.forEach(function(character){
             stage.addChild(character);
         });
-        stage.update();
+        */
     };
     this.onKeyPressed = function(event){
         that.sceneStack[that.sceneStack.length - 1].onKeyPressed(event);
