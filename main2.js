@@ -33,7 +33,8 @@ function Main(){
     queue.on("complete", handleComplete, this);
     function handleComplete() {
         ImageManager.addBitmaps(queue);
-        SceneManager.load(new Map());
+        //SceneManager.load(new Map());
+		var fi = new Fight([1,2,3]);
     }
 }
 
