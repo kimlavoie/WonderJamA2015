@@ -27,6 +27,8 @@ function Main(){
     queue.loadManifest(ImageManager.getManifest());
     queue.loadManifest(MusicManager.getManifest());
     queue.on("complete", handleComplete, this);
+
+    stage.framerate = 60;
     function handleComplete() {
         ImageManager.addBitmaps(queue);
         SceneManager.load(new Map());
