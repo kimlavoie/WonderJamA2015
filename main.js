@@ -43,6 +43,9 @@ function Main(){
             {src: "assets/villageP.png", id: "villageP"},
             {src: "assets/villageV.png", id: "villageV"},
             {src: "assets/blackbg.jpg", id: "blackbg"},
+			{src: "assets/battleKim.png", id: "battleKim"},
+			{src: "assets/battleVero.png", id: "battleVero"},
+			{src: "assets/battleJordan.png", id: "battleJordan"}
     ]);
     SoundManager.addSounds([
             {src: "assets/testSound.mp3", id: "testSound"}
