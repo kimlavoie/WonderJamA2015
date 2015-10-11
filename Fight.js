@@ -136,16 +136,16 @@ function Fight(ennemiesArray, qstage){
 		event.currentTarget.color="#FF0000";
 		stage.update();
 		
-		var attack = new createjs.Text('Attack','bold 20px Arial', '#FFF');
+		var attack = new createjs.Text('Attaque','bold 20px Arial', '#FFF');
 			hit.graphics.beginFill("#000").drawRect(0, 0, attack.getMeasuredWidth(), attack.getMeasuredHeight());
 			attack.hitArea = hit;
-		var attackSpe = new createjs.Text('Attack Spe','bold 20px Arial','#FFF');
+		var attackSpe = new createjs.Text('Attaque Spe','bold 20px Arial','#FFF');
 			hit.graphics.beginFill("#000").drawRect(0, 0, attackSpe.getMeasuredWidth(), attackSpe.getMeasuredHeight());
 			attackSpe.hitArea = hit;
 		var items = new createjs.Text('Potion','bold 20px Arial','#FFF');
 			hit.graphics.beginFill("#000").drawRect(0, 0, items.getMeasuredWidth(), items.getMeasuredHeight());
 			items.hitArea = hit;
-		var run = new createjs.Text('Run','bold 20px Arial','#FFF');
+		var run = new createjs.Text('Fuire','bold 20px Arial','#FFF');
 			hit.graphics.beginFill("#000").drawRect(0, 0, run.getMeasuredWidth(), run.getMeasuredHeight());
 			run.hitArea = hit;
 		attack.x = 20;
