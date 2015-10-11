@@ -283,9 +283,14 @@ function Fight(ennemiesArray, qstage, heroesArray, inventory){
 			break;
 			case 3: //PrepareAttack
 				console.log("PrepareAttack");
-				if(fightEnnemies[0].hp <= 0){
-					atkOrderEnnemies = [1];
-					for(i=2;i<fightEnnemies.length;i++){
+				if(numEnnemyAlive === 1){
+					for(j=0;j<fightEnnemies.length;j++){
+						if(fightEnnemies[j].hp > 0)
+							atkOrderEnnemies = [j];
+					}
+				}else if(fightEnnemies[0].hp <= 0){
+					fightEnnemies[1].hp <= 0?atkOrderEnnemies = [2]:atkOrderEnnemies = [1];
+					for(i=fightEnnemies[1].hp <= 0?3:2;i<fightEnnemies.length;i++){
 						if(fightEnnemies[i].hp > 0){
 							if(fightEnnemies[i].speed > fightEnnemies[i-1].speed)
 								atkOrderEnnemies.unshift(i);
@@ -304,12 +309,7 @@ function Fight(ennemiesArray, qstage, heroesArray, inventory){
 						}
 					}
 				}
-				if(numEnnemyAlive === 1){
-					for(j=0;j<fightEnnemies.length;j++){
-						if(fightEnnemies[j].hp > 0)
-							atkOrderEnnemies = [j];
-					}
-				}
+				
 				console.log(atkOrderEnnemies);
 				
 				if(heroesArray[0].status !== 'alive'){
