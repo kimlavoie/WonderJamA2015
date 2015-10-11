@@ -136,16 +136,16 @@ function Fight(ennemiesArray, qstage){
 		event.currentTarget.color="#FF0000";
 		stage.update();
 		
-		var attack = new createjs.Text('Attack','bold 20px Arial', '#FFF');
+		var attack = new createjs.Text('Attaque','bold 20px Arial', '#FFF');
 			hit.graphics.beginFill("#000").drawRect(0, 0, attack.getMeasuredWidth(), attack.getMeasuredHeight());
 			attack.hitArea = hit;
-		var attackSpe = new createjs.Text('Attack Spe','bold 20px Arial','#FFF');
+		var attackSpe = new createjs.Text('Attaque Spe','bold 20px Arial','#FFF');
 			hit.graphics.beginFill("#000").drawRect(0, 0, attackSpe.getMeasuredWidth(), attackSpe.getMeasuredHeight());
 			attackSpe.hitArea = hit;
 		var items = new createjs.Text('Potion','bold 20px Arial','#FFF');
 			hit.graphics.beginFill("#000").drawRect(0, 0, items.getMeasuredWidth(), items.getMeasuredHeight());
 			items.hitArea = hit;
-		var run = new createjs.Text('Run','bold 20px Arial','#FFF');
+		var run = new createjs.Text('Fuire','bold 20px Arial','#FFF');
 			hit.graphics.beginFill("#000").drawRect(0, 0, run.getMeasuredWidth(), run.getMeasuredHeight());
 			run.hitArea = hit;
 		attack.x = 20;
@@ -217,7 +217,7 @@ function Fight(ennemiesArray, qstage){
 				stage.removeChild(stage.getChildByName('items'));
 				stage.removeChild(stage.getChildByName('run'));
 			}else if(actionName === 'run'){
-				console.log("huhrun");
+				SceneManager.pop();
 			}else{
 				console.log("fail");
 			}
@@ -255,6 +255,7 @@ function Fight(ennemiesArray, qstage){
 		
 		switch(state){
 			case 0: //init
+				createjs.Tween.removeAllTweens();
 				console.log("init");
 				init();
 				state++;
@@ -376,7 +377,7 @@ function Fight(ennemiesArray, qstage){
 						//console.log("ennemy damage: " + damage);
 						fightEnnemies[heroesActionList[atkOrderHeroes[0]]].hp -= damage;
 						createjs.Ticker.addEventListener("tick", tickHandler);
-						createjs.Tween.get(p[atkOrderHeroes[0]]).to({x:200}, 500).to({x:525}, 500);
+						createjs.Tween.get(p[atkOrderHeroes[0]]).to({x:200}, 500).to({x:555}, 500);
 						createjs.Ticker.removeEventListener("tick", tickHandler);
 							stage.update();
 						//createjs.Ticker.removeEventListener("tick", fightUpdate);
@@ -391,7 +392,7 @@ function Fight(ennemiesArray, qstage){
 					heroesArray[ennemiesActionList[atkOrderEnnemies[0]]].hp -= damage;
 					console.log(atkOrderEnnemies[0]);
 					createjs.Ticker.addEventListener("tick", tickHandler);
-					createjs.Tween.get(ennemiesSprites[atkOrderEnnemies[0]]).to({x:450}, 500).to({x:atkOrderEnnemies[0]===0||atkOrderEnnemies[0]===1?170:50}, 500);
+					createjs.Tween.get(ennemiesSprites[atkOrderEnnemies[0]]).to({x:450}, 500).to({x:atkOrderEnnemies[0]===0||atkOrderEnnemies[0]===1?225:25}, 500);
 					createjs.Ticker.removeEventListener("tick", tickHandler);
 							stage.update();
 					//createjs.Ticker.removeEventListener("tick", fightUpdate);
@@ -417,7 +418,7 @@ function Fight(ennemiesArray, qstage){
 						heroesArray[ennemiesActionList[atkOrderEnnemies[0]]].hp -= damage;
 						console.log(atkOrderEnnemies[0]);
 						createjs.Ticker.addEventListener("tick", tickHandler);
-						createjs.Tween.get(ennemiesSprites[atkOrderEnnemies[0]]).to({x:450}, 500).to({x:atkOrderEnnemies[0]===0||atkOrderEnnemies[0]===1?170:50}, 500);
+						createjs.Tween.get(ennemiesSprites[atkOrderEnnemies[0]]).to({x:450}, 500).to({x:atkOrderEnnemies[0]===0||atkOrderEnnemies[0]===1?225:25}, 500);
 						createjs.Ticker.removeEventListener("tick", tickHandler);
 							stage.update();
 						//createjs.Ticker.removeEventListener("tick", fightUpdate);
@@ -435,7 +436,7 @@ function Fight(ennemiesArray, qstage){
 								fightEnnemies[i].hp -= damage;
 							}
 							createjs.Ticker.addEventListener("tick", tickHandler);
-							createjs.Tween.get(rect).to({alpha:1}, 0).to({alpha:0}, 700).wait(500).call(onAnimationComplete);
+							createjs.Tween.get(rect).to({alpha:1}, 0).to({alpha:0}, 700).wait(500);
 							createjs.Ticker.removeEventListener("tick", tickHandler);
 							stage.update();
 							//createjs.Ticker.removeEventListener("tick", fightUpdate);
@@ -450,7 +451,7 @@ function Fight(ennemiesArray, qstage){
 							//console.log("ennemy damage: " + damage);
 							fightEnnemies[heroesActionList[atkOrderHeroes[0]]].hp -= damage;
 							createjs.Ticker.addEventListener("tick", tickHandler);
-							createjs.Tween.get(p[atkOrderHeroes[0]]).to({x:200}, 500).to({x:525}, 500);
+							createjs.Tween.get(p[atkOrderHeroes[0]]).to({x:200}, 500).to({x:550}, 500);
 							createjs.Ticker.removeEventListener("tick", tickHandler);
 							stage.update();
 							//createjs.Ticker.removeEventListener("tick", fightUpdate);
@@ -463,6 +464,7 @@ function Fight(ennemiesArray, qstage){
 				}		
 			break;
 			case 8: //won battle
+				createjs.Tween.removeAllTweens();
 				var xp = 0;
 				for(i=0;i<fightEnnemies.length;i++){
 					xp += fightEnnemies[i].xp;
