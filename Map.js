@@ -22,7 +22,7 @@ function Map(){
         that.stage = stage;
     };
     this.message = (function(){
-        text = new createjs.Text("", "20px monospace");
+        text = new createjs.Text("", "20px monospace", "white");
         text.x = 10;
         text.y = VIEWPORT.height - 90;
         text.lineWidth = VIEWPORT.width - 20;

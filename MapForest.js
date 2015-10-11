@@ -57,7 +57,7 @@ function MapForest(){
             case "play":
                 that.handleWalk();
                 if(InputManager.keyStates.space){
-                    SoundManager.play("bip");
+                    if(that.messageBox.visible) SoundManager.play("bip");
                     that.hideMessage();
                 }
                 if(InputManager.keyStates.enter) 
@@ -81,7 +81,7 @@ function MapForest(){
                 //FIGHT!
                 MusicManager.play("boss");
                 SceneManager.push(new Fight(
-                        [0,0,0,0], 
+                        [8], 
                         that.stage,
                         [
                             new Hero("Kim", "slimeV1", 1,10,10,10,10,5,10,5,5,"alive"),
@@ -151,8 +151,14 @@ function MapForest(){
     this.setCameraCenter({x:50, y:100});
     this.setRandomEncounterPercentage(0.5);
     this.setEncounterGroups([
-            {enemies:[0], rate: 80},
-            {enemies:[0,1], rate: 20}
+            {enemies:[0], rate: 20},
+            {enemies:[0,1], rate: 10},
+            {enemies:[1], rate: 20},
+            {enemies:[1,2], rate: 10},
+            {enemies:[2], rate: 20},
+            {enemies:[3], rate: 10},
+            {enemies:[2,3], rate: 10},
+
             ]);
 }
 

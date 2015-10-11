@@ -17,7 +17,7 @@ function Menu(){
         kim.y = 50;
         kim.gotoAndPlay("walkDown");
         var kimStats = new createjs.Text(
-                "HP: 0\nVitesse: 0\nAttaque: 0\nDéfense: 0\nAttaque spéciale: 0\nExpérience: 0\nNiveau: 0",
+                "HP: " + heroes[2].hp + "\nVitesse: " + heroes[2].speed + "\nAttaque: " + heroes[2].atk + "\nDéfense: " + heroes[2].def + "\nAttaque spéciale: " + heroes[2].atkSpe + "\nExpérience: " + heroes[2].xp + "\nNiveau: " + heroes[2].lvl,
                 font, color);
         kimStats.x = 150;
         kimStats.y = 10;
@@ -30,7 +30,7 @@ function Menu(){
         vero.y = 210;
         vero.gotoAndPlay("walkDown");
         var veroStats = new createjs.Text(
-                "HP: 0\nVitesse: 0\nAttaque: 0\nDéfense: 0\nAttaque spéciale: 0\nExpérience: 0\nNiveau: 0",
+                "HP: " + heroes[1].hp + "\nVitesse: " + heroes[1].speed + "\nAttaque: " + heroes[1].atk + "\nDéfense: " + heroes[1].def + "\nAttaque spéciale: " + heroes[1].atkSpe + "\nExpérience: " + heroes[1].xp + "\nNiveau: " + heroes[1].lvl,
                 font, color);
         veroStats.x = 150;
         veroStats.y = 170;
@@ -43,7 +43,7 @@ function Menu(){
         jordan.y = 375;
         jordan.gotoAndPlay("walkDown");
         var jordanStats = new createjs.Text(
-                "HP: 0\nVitesse: 0\nAttaque: 0\nDéfense: 0\nAttaque spéciale: 0\nExpérience: 0\nNiveau: 0",
+                "HP: " + heroes[0].hp + "\nVitesse: " + heroes[0].speed + "\nAttaque: " + heroes[0].atk + "\nDéfense: " + heroes[0].def + "\nAttaque spéciale: " + heroes[0].atkSpe + "\nExpérience: " + heroes[0].xp + "\nNiveau: " + heroes[0].lvl,
                 font, color);
         jordanStats.x = 150;
         jordanStats.y = 330;
@@ -51,6 +51,7 @@ function Menu(){
         var box = new createjs.Graphics().setStrokeStyle(10).beginStroke("green").beginFill("#3182DE").drawRect(380,0,VIEWPORT.width-380, VIEWPORT.height);
         var boxshape = new createjs.Shape(box);
 
+        /*
         var buttonInventoryG = new createjs.Graphics().beginFill(color).drawRect(420,30,180,50);
         var buttonInventoryS = new createjs.Shape(buttonInventoryG);
         buttonInventoryS.addEventListener("click", function(event){
@@ -86,8 +87,9 @@ function Menu(){
         var textExit = new createjs.Text("Quitter", "20px Arial", "white");
         textExit.x = 480;
         textExit.y = 405;
+        */
 
-        that.stage.addChild(shape, kim, kimStats, vero, veroStats, jordan, jordanStats, sepShape, sepShape2, boxshape, buttonInventoryS, textInventory, buttonSkillsS, textSkills, buttonSaveS, textSave, buttonExitS, textExit);
+        that.stage.addChild(shape, kim, kimStats, vero, veroStats, jordan, jordanStats, sepShape, sepShape2, boxshape);
 
        
         

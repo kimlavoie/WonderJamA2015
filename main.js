@@ -77,7 +77,7 @@ function Main(){
     stage.framerate = 60;
     function handleComplete() {
         ImageManager.addBitmaps(queue);
-        SceneManager.load(new MapForest());
+        SceneManager.load(new MapMenuPrincipal());
     }
 }
 

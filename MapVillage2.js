@@ -30,7 +30,7 @@ function MapVillage2(){
             case "dialogue1":
                 delay--;
                 if(delay < 0 && InputManager.keyStates.space) {
-                    SoundManager.play("bip");
+                    if(that.messageBox.visible) SoundManager.play("bip");
                     dialogue1.cursor++;
                     delay = 2;
                 }
@@ -75,10 +75,11 @@ function MapVillage2(){
     this.setCameraCenter({x:50, y:980});
     this.setRandomEncounterPercentage(0.4);
     this.setEncounterGroups([
-            {enemies:[2,2], rate:20},
-            {enemies:[2,4], rate:20},
-            {enemies:[2,3], rate:20},
-            {enemies:[3,4], rate:40},
+            {enemies:[4,5], rate:30},
+            {enemies:[5,6], rate:20},
+            {enemies:[7], rate:20},
+            {enemies:[4,5], rate:20},
+            {enemies:[4,7], rate:10},
             ]);
 }
 

@@ -60,7 +60,7 @@ function MapFort(){
             case "play":
                 that.handleWalk();
                 if(InputManager.keyStates.space){
-                    SoundManager.play("bip");
+                    if(that.messageBox.visible) SoundManager.play("bip");
                     that.hideMessage();
                 }
                 if(InputManager.keyStates.enter) 
@@ -82,6 +82,10 @@ function MapFort(){
             case "boss":
                 //FIGHT
                 MusicManager.play("boss");
+                SceneManager.push(new Fight(
+                        [9], 
+                        that.stage
+                        ));
                 that.getObjectById("boss").visible = false;
                 gameState = "dialogue3"
                 break;
@@ -119,10 +123,9 @@ function MapFort(){
     this.setCameraCenter({x:1000, y:1380});
     this.setRandomEncounterPercentage(0.6);
     this.setEncounterGroups([
-            {enemies:[2,2], rate:20},
-            {enemies:[2,4], rate:20},
-            {enemies:[2,3], rate:20},
-            {enemies:[3,4], rate:40},
+            {enemies:[7,7], rate:50},
+            {enemies:[7,7,7], rate:30},
+            {enemies:[7,7,7,7], rate:20},
             ]);
 }
 

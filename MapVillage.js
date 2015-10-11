@@ -47,7 +47,7 @@ function MapVillage(){
             case "play":
                 that.handleWalk();
                 if(InputManager.keyStates.space){
-                    SoundManager.play("bip");
+                    if(that.messageBox.visible) SoundManager.play("bip");
                     that.hideMessage();
                 }
                 if(InputManager.keyStates.enter) 
