@@ -7,6 +7,7 @@ function Main(){
     SceneManager.stage = stage;
 
     ImageManager.addImages([
+            {src: "assets/mainMenu.jpg", id: "mainMenu"},
             {src: "assets/fightMenu.png", id: "fightMenu"},
             {src: "assets/bg.jpg", id: "bg"},
             {src: "assets/test3.jpg", id: "test3"},
@@ -73,7 +74,7 @@ function Main(){
     stage.framerate = 60;
     function handleComplete() {
         ImageManager.addBitmaps(queue);
-        SceneManager.load(new MapIntroduction());
+        SceneManager.load(new MapMenuPrincipal());
     }
 }
 
