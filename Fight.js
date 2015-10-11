@@ -50,8 +50,8 @@ function Fight(ennemiesArray, qstage, heroesArray, inventory){
 			stage.removeChild(ennemiesSprites[i]);
 			if(fightEnnemies[i].hp > 0){
 				ennemiesSprites.push(new createjs.Bitmap(ImageManager.getImage(fightEnnemies[i].spriteID)));
-				ennemiesSprites[i].x = i===0||i===1?170:50;
-				ennemiesSprites[i].y = i===0||i===2?120:220;
+				ennemiesSprites[i].x = i===0||i===1?225:25;
+				ennemiesSprites[i].y = i===0||i===2?50:175;
 				ennemiesSprites[i].name = i;
 				stage.addChild(ennemiesSprites[i]);
 				stage.update();
@@ -107,8 +107,8 @@ function Fight(ennemiesArray, qstage, heroesArray, inventory){
 			if(heroesArray[i].status === 'alive'){
 				p[i] = new createjs.Bitmap(ImageManager.getImage(heroesArray[i].spriteID));
 				p[i].name = heroesArray[i].name;
-				p[i].x = 525;
-				p[i].y = 100 + (i*70);
+				p[i].x = 550;
+				p[i].y = 150 + (i*50);
 				stage.addChild(p[i]);
 				stage.update();
 			}
