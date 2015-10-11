@@ -435,7 +435,7 @@ function Fight(ennemiesArray, qstage){
 							//console.log("ennemy damage: " + damage);
 							fightEnnemies[heroesActionList[atkOrderHeroes[0]]].hp -= damage;
 							createjs.Tween.get(p[atkOrderHeroes[0]]).to({x:200}, 500).to({x:525}, 500).call(onAnimationComplete);
-							createjs.Ticker.removeEventListener("tick", fightUpdate);
+							//createjs.Ticker.removeEventListener("tick", fightUpdate);
 						}
 						atkOrderHeroes.reverse();
 						atkOrderHeroes.pop();
@@ -458,7 +458,7 @@ function Fight(ennemiesArray, qstage){
 		}
 		
 		function onAnimationComplete(event){
-			 createjs.Ticker.addEventListener("tick", fightUpdate);
+			 //createjs.Ticker.addEventListener("tick", fightUpdate);
 		}
 	}
 	

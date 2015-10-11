@@ -72,8 +72,7 @@ function MapVillage2(){
             {name:"vero", pos:"left"},
             {name:"jordan", pos:"right"}
         ]);
-    //this.setCameraCenter({x:50, y:980});
-    this.setCameraCenter({x:1000, y:300});
+    this.setCameraCenter({x:50, y:980});
     this.setRandomEncounterPercentage(0.4);
     this.setEncounterGroups([
             {enemies:[2,2], rate:20},
