@@ -6,7 +6,8 @@ var InputManager = new (function(){
         up: false,
         down: false,
         space: false,
-        enter: false
+        enter: false,
+        escape: false
     };
     this.onKeyDown = function(event){
         switch(event.keyCode){
@@ -27,6 +28,9 @@ var InputManager = new (function(){
                 break;
             case 13:
                 that.keyStates.enter = true;
+                break;
+            case 27:
+                that.keyStates.escape = true;
                 break;
         }
     };
@@ -49,6 +53,9 @@ var InputManager = new (function(){
                 break;
             case 13:
                 that.keyStates.enter = false;
+                break;
+            case 27:
+                that.keyStates.escape = false;
                 break;
         }
     };

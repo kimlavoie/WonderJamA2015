@@ -4,7 +4,7 @@ function MapTest(){
         that.handleWalk();
         if(InputManager.keyStates.space) that.hideMessage();
         if(InputManager.keyStates.enter) 
-            SceneManager.push(new MapTest2());
+            SceneManager.push(new Menu());
         that.stage.update();
     };
     this.setBg("test");
