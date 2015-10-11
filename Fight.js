@@ -1,6 +1,12 @@
 function Fight(ennemiesArray, qstage, heroesArray, inventory){
+    this.state = "new";
+    this.onCreate = function(){};
+    this.onResume = function(){};
+    this.updateCollisions = function(){};
+    this.onUpdate = function(){};
 	var fightEnnemies = [];
 	var stage = qstage;
+    this.setStage = function(stage2){stage = stage2;};
 	var hit = new createjs.Shape();
 	var heroesArray = heroesArray;
 	var inventory = inventory;

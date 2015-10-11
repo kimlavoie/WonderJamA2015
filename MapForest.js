@@ -1,4 +1,3 @@
-
 function MapForest(){
     var that = this;
     var gameState = "new";
@@ -74,6 +73,17 @@ function MapForest(){
                 break;
             case "boss":
                 //FIGHT!
+                SceneManager.push(new Fight(
+                        [0,0,0,0], 
+                        that.stage,
+                        [
+                            new Hero("Kim", "slimeV1", 1,10,10,10,10,5,10,5,5,"alive"),
+                            new Hero("Kim2", "slimeV1", 1,10,10,10,10,5,10,5,5,"alive"),
+                            new Hero("Kim3", "slimeV1", 1,10,10,10,10,5,10,5,5,"alive"),
+                        ],
+                        new Inventory(0,0)
+                        ));
+
                 that.getObjectById("boss").visible = false;
                 gameState = "dialogue3"
                 break;
@@ -130,7 +140,7 @@ function MapForest(){
             {name:"vero", pos:"left"},
             {name:"jordan", pos:"right"}
         ]);
-    this.setCameraCenter({x:60, y:100});
+    this.setCameraCenter({x:20, y:100});
     this.setRandomEncounterPercentage(0.5);
     this.setEncounterGroups([
             {enemies:[0], rate: 80},

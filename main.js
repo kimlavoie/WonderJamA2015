@@ -7,6 +7,8 @@ function Main(){
     SceneManager.stage = stage;
 
     ImageManager.addImages([
+            {src: "assets/fightMenu.png", id: "fightMenu"},
+            {src: "assets/bg.jpg", id: "bg"},
             {src: "assets/test3.jpg", id: "test3"},
             {src: "assets/test2.png", id: "test2"},
             {src: "assets/test.png", id: "test"},
