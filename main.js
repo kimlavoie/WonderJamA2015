@@ -1,125 +1,69 @@
-var canvas; //Will be linked to the canvas in our index.html page
-var stage; //Is the equivalent of stage in AS3; we'll add "children" to it
- 
-// Graphics
-//[Background]
- 
-var bg; //The background graphic
- 
-//[Title View]
-  
- 
-var main; //The Main Background
-var startB; //The Start button in the main menu
-var creditsB; //The credits button in the main menu
- 
-//[Credits]
- 
- 
-var credits; //The Credits screen
- 
-//[Game View]
- 
- 
-var player; //The player paddle graphic
-var ball; //The ball graphic
-var cpu; //The CPU paddle
-var win; //The winning popup
-var lose; //The losing popup
+function Main(){
+    var canvas = document.getElementById("PongStage");
+    stage = new createjs.Stage(canvas);
 
-var tkr = new Object;
-
-//preloader
-var preloader;
-var manifest;
-var totalLoaded = 0;
-
-var TitleView = new Container();
-
-function Main()
-{
-    /* Link Canvas */
-     
-    canvas = document.getElementById('PongStage');
-    stage = new Stage(canvas);
-         
     stage.mouseEventsEnabled = true;
-     
-     
-    /* Set The Flash Plugin for browsers that don't support SoundJS */
-    SoundJS.FlashPlugin.BASE_PATH = "assets/";
-    if (!SoundJS.checkPlugin(true)) {
-      alert("Error!");
-      return;
-    }
- 
-    manifest = [
-                {src:"bg.png", id:"bg"},
-                {src:"main.png", id:"main"},
-                {src:"startB.png", id:"startB"},
-                {src:"creditsB.png", id:"creditsB"},
-                {src:"credits.png", id:"credits"},
-                {src:"paddle.png", id:"cpu"},
-                {src:"paddle.png", id:"player"},
-                {src:"ball.png", id:"ball"},
-                {src:"win.png", id:"win"},
-                {src:"lose.png", id:"lose"},
-                {src:"playerScore.mp3|playerScore.ogg", id:"playerScore"},
-                {src:"enemyScore.mp3|enemyScore.ogg", id:"enemyScore"},
-                {src:"hit.mp3|hit.ogg", id:"hit"},
-                {src:"wall.mp3|wall.ogg", id:"wall"}
-            ];
- 
- 
- 
-    preloader = new PreloadJS();
-    preloader.installPlugin(SoundJS);
-    preloader.onProgress = handleProgress;
-    preloader.onComplete = handleComplete;
-    preloader.onFileLoad = handleFileLoad;
-    preloader.loadManifest(manifest);
- 
-    /* Ticker */
-     
-    Ticker.setFPS(30);
-    Ticker.addListener(stage);
-}
 
-function handleProgress(event)
-{
-    //use event.loaded to get the percentage of the loading
-}
- 
-function handleComplete(event) {
-         //triggered when all loading is complete
-}
- 
-function handleFileLoad(event) {
-    //triggered when an individual file completes loading
-             
-    switch(event.type)
-    {
-        case PreloadJS.IMAGE:
-            //image loaded
-            var img = new Image();
-            img.src = event.src;
-            img.onload = handleLoadComplete;
-			window[event.id] = new Bitmap(img);
-        break;
- 
-        case PreloadJS.SOUND:
-        //sound loaded
-        handleLoadComplete();
-        break;
+    SceneManager.stage = stage;
+
+    ImageManager.addImages([
+            {src: "assets/test3.jpg", id: "test3"},
+            {src: "assets/test2.png", id: "test2"},
+            {src: "assets/test.png", id: "test"},
+            {src: "assets/boss1.png", id: "boss1"},
+            {src: "assets/boss2.png", id: "boss2"},
+            {src: "assets/bushP.png", id: "bushP"},
+            {src: "assets/bushV.png", id: "bushV"},
+            {src: "assets/dungeonBuilding.png", id: "dungeonBuilding"},
+            {src: "assets/dungeonEnter.png", id: "dungeonEnter"},
+            {src: "assets/dungeonInside.png", id: "dungeonInside"},
+            {src: "assets/forest.png", id: "forest"},
+            {src: "assets/maisonP.png", id: "maisonP"},
+            {src: "assets/maisonV.png", id: "maisonV"},
+            {src: "assets/slimeP2.png", id: "slimeP2"},
+            {src: "assets/rockP1.png", id: "rockP1"},
+            {src: "assets/rockP2.png", id: "rockP2"},
+            {src: "assets/slimeP3.png", id: "slimeP3"},
+            {src: "assets/rockV1.png", id: "rockV1"},
+            {src: "assets/rockV2.png", id: "rockV2"},
+            {src: "assets/slimeP1.png", id: "slimeP1"},
+            {src: "assets/slimeP4.png", id: "slimeP4"},
+            {src: "assets/slimeV1.png", id: "slimeV1"},
+            {src: "assets/slimeV2.png", id: "slimeV2"},
+            {src: "assets/slimeV3.png", id: "slimeV3"},
+            {src: "assets/slimeV4.png", id: "slimeV4"},
+            {src: "assets/treeP1.png", id: "treeP1"},
+            {src: "assets/treeP2.png", id: "treeP2"},
+            {src: "assets/treeP3.png", id: "treeP3"},
+            {src: "assets/treeV1.png", id: "treeV1"},
+            {src: "assets/treeV2.png", id: "treeV2"},
+            {src: "assets/treeV3.png", id: "treeV3"},
+            {src: "assets/villageP.png", id: "villageP"},
+            {src: "assets/villageV.png", id: "villageV"},
+            {src: "assets/blackbg.jpg", id: "blackbg"},
+    ]);
+    SoundManager.addSounds([
+            {src: "assets/testSound.mp3", id: "testSound"}
+    ]);
+    MusicManager.addMusics([
+            {src: "assets/testSound.mp3", id: "testMusic"}
+    ]);
+
+    this.document.onkeydown = InputManager.onKeyDown;
+    this.document.onkeyup = InputManager.onKeyUp;
+
+
+    var queue = new createjs.LoadQueue();
+    queue.installPlugin(createjs.Sound);
+    queue.loadManifest(SoundManager.getManifest());
+    queue.loadManifest(ImageManager.getManifest());
+    queue.loadManifest(MusicManager.getManifest());
+    queue.on("complete", handleComplete, this);
+
+    stage.framerate = 60;
+    function handleComplete() {
+        ImageManager.addBitmaps(queue);
+        SceneManager.load(new MapVillage2());
     }
 }
 
-function handleLoadComplete(event) 
-{
-   totalLoaded++;
-    
-   if(manifest.length==totalLoaded)
-   {
-       addTitleView();
-   }
-}

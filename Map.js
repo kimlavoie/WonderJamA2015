@@ -45,6 +45,11 @@ function Map(){
     })();
     this.innerObjects = new createjs.Container();
     this.mainCharacters = new createjs.Container();
+    this.getObjectById = function(id){
+        for(var i = 0 ; i < that.innerObjects.children.length; i++){
+            if(that.innerObjects.children[i].id === id) return that.innerObjects.children[i];
+        }
+    };
     this.onCreate = function(){
         var bg = new createjs.Bitmap(ImageManager.getImage(that.bg));
         bg.x = bg.x; 
@@ -59,6 +64,7 @@ function Map(){
                     break;
                 case "text":
                     newObject = new createjs.Text(object.text, object.font, object.color);
+                    newObject.textAlign = object.align ? object.align : "left";
                     break;
                 case "spritesheet":
                     newObject = SpriteManager[object.spriteName].clone();
@@ -72,6 +78,7 @@ function Map(){
                 newObject.solid = object.solid ? object.solid : false;
                 newObject.onCollision = object.onCollision;
             }
+            if(object.id) newObject.id = object.id;
             that.innerObjects.addChild(newObject);
         });
         that.characters.forEach(function(character){
@@ -150,7 +157,7 @@ function Map(){
             that.direction = direction;
          }
     }
-    function face(direction){
+    this.face = function(direction){
         direction = direction.charAt(0).toUpperCase() + direction.slice(1);
         SpriteManager.kim.gotoAndPlay("stand" + direction);
         SpriteManager.vero.gotoAndPlay("stand" + direction);
@@ -186,7 +193,7 @@ function Map(){
         else{
             walked = false;
             that.walking = false;
-            face(that.direction);
+            that.face(that.direction);
         }
         if(walked){
             if(Math.random()*100 < that.randomEncounterPercentage){
