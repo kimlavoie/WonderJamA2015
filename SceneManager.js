@@ -40,8 +40,8 @@ var SceneManager = new (function(){
 
         createjs.Ticker.framerate = 20;
         createjs.Ticker.addEventListener("tick", function(event){
-            currentScene.updateCollisions();
             currentScene.onUpdate();
+            currentScene.updateCollisions();
         });
 
     };

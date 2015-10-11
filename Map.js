@@ -128,21 +128,27 @@ function Map(){
     this.walking = false;
     this.direction = "down";
     this.handleWalk = function(){
+        var bounds = (new createjs.Bitmap(ImageManager.getImage(that.bg))).getBounds(); //TODO find a better way, might be slow...
+        var offset = that.innerObjects.localToGlobal(0,0);
         if(InputManager.keyStates.right){
             walk("right");
-            that.moveCamera(5,0)
+            if(offset.x + bounds.width - 5 - 32> VIEWPORT.width/2)
+                that.moveCamera(5,0)
         }
         else if(InputManager.keyStates.down){
             walk("down");
-            that.moveCamera(0,5)
+            if(offset.y + bounds.height - 5 - 144/3> VIEWPORT.height/2)
+                that.moveCamera(0,5)
         }
         else if(InputManager.keyStates.up){
             walk("up");
-            that.moveCamera(0,-5)
+            if(offset.y + 5 + 144/3 < VIEWPORT.height/2)
+                that.moveCamera(0,-5)
         }
         else if(InputManager.keyStates.left){
             walk("left");
-            that.moveCamera(-5,0)
+            if(offset.x + 5 + 32 < VIEWPORT.width/2)
+                that.moveCamera(-5,0)
         }
         else{
             that.walking = false;
