@@ -65,6 +65,7 @@ function Map(){
             newObject.y = object.pos.y;
             if(object.collidable){
                 newObject.collidable = true;
+                newObject.solid = object.solid ? object.solid : false;
                 newObject.onCollision = object.onCollision;
             }
             that.innerObjects.addChild(newObject);
@@ -174,6 +175,22 @@ function Map(){
         that.mainCharacters.children.forEach(function(character){
             that.innerObjects.children.forEach(function(object){
                 if(object.collidable && collide(character, object)){
+                    if(object.solid){
+                        switch(that.direction){
+                            case "Right":
+                                that.moveCamera(-5,0);
+                                break;
+                            case "Left":
+                                that.moveCamera(5,0);
+                                break;
+                            case "Up":
+                                that.moveCamera(0,5);
+                                break;
+                            case "Down":
+                                that.moveCamera(0,-5);
+                                break;
+                        }
+                    }
                     character.onCollision(object);
                     object.onCollision(character);
                 }

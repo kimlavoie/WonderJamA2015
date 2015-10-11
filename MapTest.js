@@ -11,7 +11,7 @@ function MapTest(){
     this.setObjects([
             {type: "image", collidable: false, pos: {x:0, y:0}, imgID: "test2", onCollision: function(character){}},
             {type: "image", collidable: false, pos: {x:100, y:100}, imgID: "test2"},
-            {type: "text", collidable: true, onCollision: function(character){that.showMessage("YOUPPI!");},pos: {x:200, y:400}, text: "Hello!", font: "20px Arial", color: "#ff00ff"}
+            {type: "text", collidable: true, solid: true,onCollision: function(character){that.showMessage("YOUPPI!");},pos: {x:200, y:400}, text: "Hello!", font: "20px Arial", color: "#ff00ff"}
         ]);
     this.setCharacters([
             {name:"kim", pos:"top"},
