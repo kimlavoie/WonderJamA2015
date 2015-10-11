@@ -162,6 +162,7 @@ function Map(){
     this.handleWalk = function(){
         var bounds = (new createjs.Bitmap(ImageManager.getImage(that.bg))).getBounds(); //TODO find a better way, might be slow...
         var offset = that.innerObjects.localToGlobal(0,0);
+        var walked = true;
         if(InputManager.keyStates.right){
             walk("right");
             if(offset.x + bounds.width - 5 - 32> VIEWPORT.width/2)
@@ -183,8 +184,24 @@ function Map(){
                 that.moveCamera(-5,0)
         }
         else{
+            walked = false;
             that.walking = false;
             face(that.direction);
+        }
+        if(walked){
+            if(Math.random()*100 < that.randomEncounterPercentage){
+                console.log("Random encounter!");
+                var n = Math.random()*100;
+                var result;
+                for(var i = 0; i<that.encounterGroups.length; i++){
+                    n -= that.encounterGroups[i].rate;
+                    if(n < 0){
+                        result = that.encounterGroups[i].enemies;
+                        break;
+                    }
+                }
+                console.log(result);
+            }
         }
     };
     function collide(o1, o2){

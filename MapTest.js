@@ -20,8 +20,11 @@ function MapTest(){
             {name:"jordan", pos:"right"}
         ]);
     this.setCameraCenter({x:200, y:500});
-    this.setRandomEncounterPercentage(0);
-    this.setEncounterGroups([]);
+    this.setRandomEncounterPercentage(0.55);
+    this.setEncounterGroups([
+            {enemies:["slime", "slime"], rate:20},
+            {enemies:["slime"], rate:80} 
+            ]);
 }
 
 MapTest.prototype = new Map();
