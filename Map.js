@@ -60,6 +60,10 @@ function Map(){
                 case "text":
                     newObject = new createjs.Text(object.text, object.font, object.color);
                     break;
+                case "spritesheet":
+                    newObject = SpriteManager[object.spriteName].clone();
+                    newObject.gotoAndPlay("walkDown");
+                    break;
             }
             newObject.x = object.pos.x;
             newObject.y = object.pos.y;
@@ -97,6 +101,33 @@ function Map(){
         that.stage.addChild(that.innerObjects);
         that.stage.addChild(that.messageBox);
         that.stage.addChild(that.mainCharacters);
+    };
+    this.onResume = function(){
+        that.stage.addChild(that.innerObjects);
+        that.stage.addChild(that.messageBox);
+        that.stage.addChild(that.mainCharacters);
+        that.characters.forEach(function(character){
+            var sprite = SpriteManager[character.name];
+            sprite.onCollision = function(obj){
+                console.log("collision!");
+            };
+            var pos;
+            switch(character.pos){
+                case "top":
+                    pos = {x:VIEWPORT.width/2-16, y:VIEWPORT.height/2-144/3};
+                    break;
+                case "left":
+                    pos = {x:VIEWPORT.width/2-32, y:VIEWPORT.height/2};
+                    break;
+                case "right":
+                    pos = {x:VIEWPORT.width/2, y:VIEWPORT.height/2};
+                   break;
+            }
+            sprite.x = pos.x;
+            sprite.y = pos.y;
+
+            that.mainCharacters.addChild(sprite);
+        });
     };
     this.showMessage = function(message){
         that.message.text = message;

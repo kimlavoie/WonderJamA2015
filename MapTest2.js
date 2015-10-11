@@ -2,7 +2,9 @@ function MapTest2(){
     var that = this;
     this.onUpdate = function(){
         that.handleWalk();
-        if(InputManager.keyStates.space) that.hideMessage();
+        if(InputManager.keyStates.enter) that.hideMessage();
+        if(InputManager.keyStates.space) 
+            SceneManager.pop();
         that.stage.update();
     };
     this.setBg("test");
