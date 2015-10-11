@@ -24,30 +24,37 @@ var heroes = (function(){
 	return heroesArray;
 })();
 
+function giveExp(exp){
+	for(i=0;i<3;i++){
+		heroes[i].exp += exp;
+	}
+	checkLvlup();
+}
+
 function checkLvlup(){
 	switch(heroes[0].lvl){
 		case 1:
-			if(heroes[0] >= 10){
+			if(heroes[0] >= 10)
 				lvlup();
 		break;
 		case 2:
-			if(heroes[0] >= 15){
+			if(heroes[0] >= 15)
 				lvlup();
 		break;
 		case 3:
-			if(heroes[0] >= 25){
+			if(heroes[0] >= 25)
 				lvlup();
 		break;
 		case 4:
-			if(heroes[0] >= 50){
+			if(heroes[0] >= 50)
 				lvlup();
 		break;
 		case 5:
-			if(heroes[0] >= 100){
+			if(heroes[0] >= 100)
 				lvlup();
 		break;
 		case 6:
-			if(heroes[0] >= 175){
+			if(heroes[0] >= 175)
 				lvlup();
 		break;
 	}

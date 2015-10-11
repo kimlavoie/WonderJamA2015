@@ -209,13 +209,7 @@ function Map(){
                 }
                 SceneManager.push(new Fight(
                         result, 
-                        that.stage,
-                        [
-                            new Hero("Kim", "slimeV1", 1,10,10,10,10,5,10,5,5,"alive"),
-                            new Hero("Véro", "slimeV1", 1,10,10,10,10,5,10,5,5,"alive"),
-                            new Hero("Jordan", "slimeV1", 1,10,10,10,10,5,10,5,5,"alive"),
-                        ],
-                        new Inventory(0,0)
+                        that.stage
                         ));
             }
         }

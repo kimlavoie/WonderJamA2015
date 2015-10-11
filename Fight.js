@@ -1,4 +1,4 @@
-function Fight(ennemiesArray, qstage, heroesArray, inventory){
+function Fight(ennemiesArray, qstage){
     this.state = "new";
     this.onCreate = function(){};
     this.onResume = function(){};
@@ -8,8 +8,8 @@ function Fight(ennemiesArray, qstage, heroesArray, inventory){
 	var stage = qstage;
     this.setStage = function(stage2){stage = stage2;};
 	var hit = new createjs.Shape();
-	var heroesArray = heroesArray;
-	var inventory = inventory;
+	var heroesArray = heroes;
+	var inventory = gInventory;
 	
 	var heroesActionList = [null,null,null];
 	var ennemiesActionList = [];
@@ -266,6 +266,8 @@ function Fight(ennemiesArray, qstage, heroesArray, inventory){
 				placePlayers();
 				if(numHeroAlive === 0)
 					state = 9;
+				else if(numEnnemyAlive === 0)
+					state = 8;
 				else if(/*heroesActionList.length === numHeroAlive && */heroesActionList[0] !== null && heroesActionList[1] !== null && heroesActionList[2] !== null)
 					state++;
 			break;
@@ -390,7 +392,7 @@ function Fight(ennemiesArray, qstage, heroesArray, inventory){
 						atkOrderEnnemies.reverse();
 				}else if(atkOrderEnnemies.length === 0 && atkOrderHeroes.length === 0){
 					console.log("-----HP ennemies-------");
-					for(i=0;i<4;i++){
+					for(i=0;i<fightEnnemies.length;i++){
 						console.log(": "+fightEnnemies[i].hp);
 					}
 					console.log("-----------------------");
@@ -443,10 +445,15 @@ function Fight(ennemiesArray, qstage, heroesArray, inventory){
 				}		
 			break;
 			case 8: //won battle
-			
+				var xp = 0;
+				for(i=0;i<fightEnnemies.length;i++){
+					xp += fightEnnemies[i].xp;
+				}
+				giveExp(xp);
+				SceneManager.pop();
 			break;
 			case 9: //gameOver
-			
+				//SceneManager.load(new MapGameOver());
 			break;
 		}
 		
