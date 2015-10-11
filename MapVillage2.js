@@ -10,7 +10,6 @@ function MapVillage2(){
             "Véro: C'est comme si tout avait été abandonné...",
             "Jordan: Noooooon",
             "Kim: Allons voir au nord, à la vieille forteresse!",
-             "Jordan: Par le chemin où la grosse roche?",
              "Kim: Oui."
         ],
         cursor: 0
@@ -47,19 +46,20 @@ function MapVillage2(){
                 break;
             case "end":
                 that.face("up");
-                if(InputManager.keyStates.space) SceneManager.load(new MapTest());
+                if(InputManager.keyStates.space) SceneManager.load(new MapFort());
                 break;
         }
         that.stage.update();
     };
     this.setBg("villageP");
     this.setObjects([
-            {type: "image", collidable: true, solid: true, pos: {x:1270, y:30}, imgID: "maisonP", onCollision: function(character){}},
             {type: "image", collidable: true, solid: true, pos: {x:470, y:670}, imgID: "maisonP", onCollision: function(character){}},
             {type: "image", collidable: true, solid: true, pos: {x:130, y:670}, imgID: "maisonP", onCollision: function(character){}},
             {type: "image", collidable: true, solid: true, pos: {x:470, y:1040}, imgID: "maisonP", onCollision: function(character){}},
             {type: "image", collidable: true, solid: true, pos: {x:130, y:1040}, imgID: "maisonP", onCollision: function(character){}},
-            {type: "image", collidable: true, solid: true, onCollision: function(){that.showMessage("Vite, vers la forteresse!"); gameState = "end";}, pos: {x:1050, y:20}, imgID: "rockP1"},
+            {type: "image", collidable: true, solid: true, pos: {x:100, y:-280}, imgID: "dungeonBuilding", onCollision: function(character){}},
+            {type: "image", collidable: true, solid: true, onCollision: function(){that.showMessage("Vite, entrons!"); gameState = "end";}, pos: {x:700, y:30}, imgID: "rockP1"},
+            {type: "image", collidable: true, solid: true, pos: {x:1285, y:30}, imgID: "maisonP", onCollision: function(character){}},
             {id: "title", type: "text", pos: {x:50, y:800}, align: "center", text: "Chapitre 3\nDésolation", font: "50px Georgia", color: "#723CDE"}
         ]);
     this.setCharacters([
@@ -67,7 +67,8 @@ function MapVillage2(){
             {name:"vero", pos:"left"},
             {name:"jordan", pos:"right"}
         ]);
-    this.setCameraCenter({x:50, y:980});
+    //this.setCameraCenter({x:50, y:980});
+    this.setCameraCenter({x:1000, y:300});
     this.setRandomEncounterPercentage(0.4);
     this.setEncounterGroups([
             {enemies:[2,2], rate:20},
