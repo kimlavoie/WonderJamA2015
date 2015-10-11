@@ -7,12 +7,13 @@ function Main(){
     SceneManager.stage = stage;
 
     ImageManager.addImages([
-            {src: "assets/test2.png", id: "test2"},
-            {src: "assets/test.png", id: "test"},
+            //{src: "assets/test2.png", id: "test2"},
+            //{src: "assets/test.png", id: "test"},
 			{src: "assets/potato.jpg", id:"potato"},
 			{src: "assets/bg.jpg", id:"bg"},
-			{src: "assets/fightMenu.png", id:"fightMenu"},
+			{src: "assets/fightMenu.jpg", id:"fightMenu"},
 			{src: "assets/ennemy.png", id:"ennemySprite"},
+			{src: "assets/player.png", id:"playerSprite"}
     ]);
     SoundManager.addSounds([
             {src: "assets/testSound.mp3", id: "testSound"}
@@ -33,8 +34,22 @@ function Main(){
     queue.on("complete", handleComplete, this);
     function handleComplete() {
         ImageManager.addBitmaps(queue);
-        //SceneManager.load(new Map());
-		var fi = new Fight([1,2,3]);
+		//SceneManager.load(new Map());
+		
+		var heroesArray = [];
+		heroesArray.push(new Hero("Jordan", "playerSprite", 1, 30, 30, 10, 10, 10, 5, 5, 6, 'alive'));
+		heroesArray.push(new Hero("Veronique", "playerSprite", 1, 25, 25, 15, 15, 7, 8, 4, 7, 'alive'));
+		heroesArray.push(new Hero("Kim", "playerSprite", 1, 35, 35, 11, 11, 8, 5, 4, 8, 'alive'));
+		
+		var inv = new Inventory(5,5);
+		
+		var fi = new Fight([0,1,2,3], stage, heroesArray, inv);
     }
+	
+	function handleTick(event) {
+		// Actions carried out each tick (aka frame)
+		if (!event.paused) {
+			// Actions carried out when the Ticker is not paused.
+		}
+	}
 }
-
