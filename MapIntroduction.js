@@ -11,9 +11,15 @@ function MapIntroduction(){
         ];
     var curMes = 0;
     var delay = 2;
+    var hack = false;
     this.onUpdate = function(){
+        if(!hack){
+            MusicManager.play("dark");
+            hack = true;
+        }
         delay--;
         if(delay < 0 && InputManager.keyStates.space){
+            SoundManager.play("bip");
             curMes++;
             delay = 2;
         }

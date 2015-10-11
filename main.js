@@ -45,10 +45,18 @@ function Main(){
             {src: "assets/blackbg.jpg", id: "blackbg"},
     ]);
     SoundManager.addSounds([
-            {src: "assets/testSound.mp3", id: "testSound"}
+            {src: "assets/testSound.mp3", id: "testSound"},
+            {src: "assets/bip.mp3", id: "bip"}
     ]);
     MusicManager.addMusics([
-            {src: "assets/testSound.mp3", id: "testMusic"}
+            {src: "assets/testSound.mp3", id: "testMusic"},
+            {src: "assets/dark.mp3", id: "dark"},
+            {src: "assets/forest.mp3", id: "forestMusic"},
+            {src: "assets/peaceful.mp3", id: "peaceful"},
+            {src: "assets/adventure.mp3", id: "adventure"},
+            {src: "assets/lullaby.mp3", id: "lullaby"},
+            {src: "assets/boss.mp3", id: "boss"},
+            {src: "assets/playground.mp3", id: "playground"},
     ]);
 
     this.document.onkeydown = InputManager.onKeyDown;

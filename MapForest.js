@@ -34,6 +34,7 @@ function MapForest(){
         switch(gameState){
             case "new":
                 setTimeout(function(){
+                    MusicManager.play("adventure");
                     var title = that.getObjectById("title");
                     title.visible = false;
                     gameState = "dialogue1";
@@ -43,6 +44,7 @@ function MapForest(){
             case "dialogue1":
                 delay--;
                 if(delay < 0 && InputManager.keyStates.space) {
+                    SoundManager.play("bip");
                     dialogue1.cursor++;
                     delay = 2;
                 }
@@ -62,6 +64,7 @@ function MapForest(){
                 that.face("down");
                 delay--;
                 if(delay < 0 && InputManager.keyStates.space) {
+                    SoundManager.play("bip");
                     dialogue2.cursor++;
                     delay = 2;
                 }
@@ -73,6 +76,7 @@ function MapForest(){
                 break;
             case "boss":
                 //FIGHT!
+                MusicManager.play("boss");
                 SceneManager.push(new Fight(
                         [0,0,0,0], 
                         that.stage,
@@ -91,6 +95,7 @@ function MapForest(){
                 that.face("down");
                 delay--;
                 if(delay < 0 && InputManager.keyStates.space) {
+                    SoundManager.play("bip");
                     dialogue3.cursor++;
                     delay = 2;
                 }
@@ -140,7 +145,7 @@ function MapForest(){
             {name:"vero", pos:"left"},
             {name:"jordan", pos:"right"}
         ]);
-    this.setCameraCenter({x:20, y:100});
+    this.setCameraCenter({x:50, y:100});
     this.setRandomEncounterPercentage(0.5);
     this.setEncounterGroups([
             {enemies:[0], rate: 80},

@@ -24,6 +24,7 @@ function MapVillage(){
         switch(gameState){
             case "new":
                 setTimeout(function(){
+                    MusicManager.play("peaceful");
                     var title = that.getObjectById("title");
                     title.visible = false;
                     gameState = "dialogue1";
@@ -33,6 +34,7 @@ function MapVillage(){
             case "dialogue1":
                 delay--;
                 if(delay < 0 && InputManager.keyStates.space) {
+                    SoundManager.play("bip");
                     dialogue1.cursor++;
                     delay = 2;
                 }

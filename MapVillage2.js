@@ -20,6 +20,7 @@ function MapVillage2(){
         switch(gameState){
             case "new":
                 setTimeout(function(){
+                    MusicManager.play("forest2");
                     var title = that.getObjectById("title");
                     title.visible = false;
                     gameState = "dialogue1";
@@ -29,6 +30,7 @@ function MapVillage2(){
             case "dialogue1":
                 delay--;
                 if(delay < 0 && InputManager.keyStates.space) {
+                    SoundManager.play("bip");
                     dialogue1.cursor++;
                     delay = 2;
                 }

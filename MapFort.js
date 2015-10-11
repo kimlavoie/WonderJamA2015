@@ -47,6 +47,7 @@ function MapFort(){
             case "dialogue1":
                 delay--;
                 if(delay < 0 && InputManager.keyStates.space) {
+                    SoundManager.play("bip");
                     dialogue1.cursor++;
                     delay = 2;
                 }
@@ -65,6 +66,7 @@ function MapFort(){
             case "dialogue2":
                 delay--;
                 if(delay < 0 && InputManager.keyStates.space) {
+                    SoundManager.play("bip");
                     dialogue2.cursor++;
                     delay = 2;
                 }
@@ -76,6 +78,7 @@ function MapFort(){
                 break;
             case "boss":
                 //FIGHT
+                MusicManager.play("boss");
                 that.getObjectById("boss").visible = false;
                 gameState = "dialogue3"
                 break;
@@ -83,6 +86,7 @@ function MapFort(){
                 that.face("up");
                 delay--;
                 if(delay < 0 && InputManager.keyStates.space) {
+                    SoundManager.play("bip");
                     dialogue3.cursor++;
                     delay = 2;
                 }
