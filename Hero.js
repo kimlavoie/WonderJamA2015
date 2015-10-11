@@ -15,55 +15,55 @@ function Hero(name, spriteID, lvl, maxHP, hp, maxSP, sp, atk, atkSpe, speed, def
 	console.log("Hero created");
 }
 
-function createHero(){
+var heroes = (function(){
 	var heroesArray = [];
 	heroesArray.push(new Hero("Jordan", "battleJordan", 1, 30, 30, 10, 10, 10, 5, 5, 6, 0, 'alive'));
 	heroesArray.push(new Hero("Vero", "battleVero", 1, 25, 25, 15, 15, 7, 8, 4, 7, 0, 'alive'));
 	heroesArray.push(new Hero("Kim", "battleKim", 1, 35, 35, 11, 11, 8, 5, 4, 8, 0, 'alive'));
 	
 	return heroesArray;
-}
+})();
 
-function checkLvlup(heroesArray){
-	switch(heroesArray[0].lvl){
+function checkLvlup(){
+	switch(heroes[0].lvl){
 		case 1:
-			if(heroesArray[0] >= 10){
+			if(heroes[0] >= 10){
 				lvlup();
 		break;
 		case 2:
-			if(heroesArray[0] >= 15){
+			if(heroes[0] >= 15){
 				lvlup();
 		break;
 		case 3:
-			if(heroesArray[0] >= 25){
+			if(heroes[0] >= 25){
 				lvlup();
 		break;
 		case 4:
-			if(heroesArray[0] >= 50){
+			if(heroes[0] >= 50){
 				lvlup();
 		break;
 		case 5:
-			if(heroesArray[0] >= 100){
+			if(heroes[0] >= 100){
 				lvlup();
 		break;
 		case 6:
-			if(heroesArray[0] >= 175){
+			if(heroes[0] >= 175){
 				lvlup();
 		break;
 	}
 	
 	function lvlup(){
 		for(i=0;i<3;i++){
-			heroesArray[i].lvl ++;
-			heroesArray[i].maxHP += 5;
-			heroesArray[i].hp = heroesArray[i].maxHP;
-			heroesArray[i].maxSP += 2;
-			heroesArray[i].sp = heroesArray[i].maxSP;
-			heroesArray[i].atk += 2;
-			heroesArray[i].atkSpe += 2;
-			heroesArray[i].speed += 1;
-			heroesArray[i].def += 1;
-			heroesArray[i].xp = 0;
+			heroes[i].lvl ++;
+			heroes[i].maxHP += 5;
+			heroes[i].hp = heroesArray[i].maxHP;
+			heroes[i].maxSP += 2;
+			heroes[i].sp = heroesArray[i].maxSP;
+			heroes[i].atk += 2;
+			heroes[i].atkSpe += 2;
+			heroes[i].speed += 1;
+			heroes[i].def += 1;
+			heroes[i].xp = 0;
 		}
 	}
 }
