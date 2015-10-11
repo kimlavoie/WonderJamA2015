@@ -1,14 +1,7 @@
-function MapFin(){
+function MapGameOver(){
     var that = this;
     var gameState = "new";
     var delay = 2;
-    var dialogue1 = {
-        lines: [
-            "Jordan: Assez, j'en ai marre, on se casse!",
-            "Kim et Véro: OUAIS!"
-        ],
-        cursor: 0
-    };
 
     this.onUpdate = function(){
             
@@ -21,7 +14,7 @@ function MapFin(){
     };
     this.setBg("blackbg");
     this.setObjects([
-            {id: "title", type: "text", pos: {x:0, y:-100}, align: "center", text: "FIN", font: "200px Georgia", color: "#723CDE"}
+            {id: "title", type: "text", pos: {x:0, y:-100}, align: "center", text: "Vous êtes MORT!", font: "200px Georgia", color: "#723CDE"}
         ]);
     this.setCharacters([
         ]);
@@ -31,4 +24,4 @@ function MapFin(){
             ]);
 }
 
-MapFin.prototype = new Map();
+MapGameOver.prototype = new Map();

@@ -42,7 +42,10 @@ function MapVillage2(){
                 break;
             case "play":
                 that.handleWalk();
-                if(InputManager.keyStates.space) that.hideMessage();
+                if(InputManager.keyStates.space){
+                    SoundManager.play("bip");
+                    that.hideMessage();
+                }
                 if(InputManager.keyStates.enter) 
                     SceneManager.push(new Menu());
                 break;

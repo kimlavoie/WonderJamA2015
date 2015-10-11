@@ -23,7 +23,10 @@ function MapIntroduction(){
             curMes++;
             delay = 2;
         }
-        if(curMes >= messages.length) SceneManager.load(new MapVillage());
+        if(curMes >= messages.length){
+            MusicManager.stop();
+            SceneManager.load(new MapVillage());
+        }
         that.showMessage(messages[curMes]);
         that.stage.update();
     };

@@ -46,16 +46,19 @@ function MapVillage(){
                 break;
             case "play":
                 that.handleWalk();
-                if(InputManager.keyStates.space) that.hideMessage();
+                if(InputManager.keyStates.space){
+                    SoundManager.play("bip");
+                    that.hideMessage();
+                }
                 if(InputManager.keyStates.enter) 
                     SceneManager.push(new Menu());
                 break;
             case "end":
                 that.face("down");
+                MusicManager.stop();
                 if(InputManager.keyStates.space) SceneManager.load(new MapForest());
                 break;
         }
-        //if(InputManager.keyStates.space) that.hideMessage();
         that.stage.update();
     };
     this.setBg("villageV");

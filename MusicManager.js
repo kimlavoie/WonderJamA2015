@@ -25,7 +25,7 @@ var MusicManager = new (function() {
          if(that.currentMusic !== null){
              that.stop();
          }
-             that.currentMusic = createjs.Sound.play(id);
+         that.currentMusic = createjs.Sound.play(id);
          that.currentMusic.loop = loop ? -1 : 0;
      };
      this.stop = function(){
